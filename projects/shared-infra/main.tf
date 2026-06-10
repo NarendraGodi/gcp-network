@@ -3,7 +3,7 @@ terraform {
     organization = "narendragodi-cv"
 
     workspaces {
-      name = "gcp-networking"
+      tags = ["networking"]
     }
   }
 
@@ -21,7 +21,7 @@ provider "google" {
 }
 
 locals {
-  foundation_data = jsondecode(file("${path.module}/../../data/foundation_layer.json"))
+  foundation_data = jsondecode(file("${path.module}/foundation_layer.json"))
   billing_account = "015CC7-496842-8E745D"
   
   # Select the data for the target environment

@@ -1,0 +1,70 @@
+name: "Terraform Multi-Env Deployment"
+
+on:
+  push:
+    branches: ["*"] # Trigger on all branches
+
+jobs:
+  terraform:
+    name: "Terraform Workflow"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v4
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_token: ${{ secrets.TF_API_TOKEN }}
+
+      # PHASE 1: Feature Branches (Any branch except dev, nonprod, main)
+      - name: "Feature: Plan against Dev"
+        if: github.ref_name != 'dev' && github.ref_name != 'nonprod' && github.ref_name != 'main'
+        run: |
+          export TF_WORKSPACE=gcp-networking-dev
+          terraform init -reconfigure
+          terraform plan -var="target_env=dev" -no-color
+        working-directory: projects/shared-infra
+
+      # PHASE 2: Dev Branch (Apply Dev -> Plan Non-Prod)
+      - name: "Dev: Apply"
+        if: github.ref_name == 'dev'
+        run: |
+          export TF_WORKSPACE=gcp-networking-dev
+          terraform init -reconfigure
+          terraform apply -var="target_env=dev" -auto-approve -no-color
+        working-directory: projects/shared-infra
+
+      - name: "Dev -> Non-Prod: Plan Forward"
+        if: github.ref_name == 'dev'
+        run: |
+          export TF_WORKSPACE=gcp-networking-nonprod
+          terraform init -reconfigure
+          terraform plan -var="target_env=nonprod" -no-color
+        working-directory: projects/shared-infra
+
+      # PHASE 3: Non-Prod Branch (Apply Non-Prod -> Plan Prod)
+      - name: "Non-Prod: Apply"
+        if: github.ref_name == 'nonprod'
+        run: |
+          export TF_WORKSPACE=gcp-networking-nonprod
+          terraform init -reconfigure
+          terraform apply -var="target_env=nonprod" -auto-approve -no-color
+        working-directory: projects/shared-infra
+
+      - name: "Non-Prod -> Prod: Plan Forward"
+        if: github.ref_name == 'nonprod'
+        run: |
+          export TF_WORKSPACE=gcp-networking-prod
+          terraform init -reconfigure
+          terraform plan -var="target_env=prod" -no-color
+        working-directory: projects/shared-infra
+
+      # PHASE 4: Main Branch (Apply Prod)
+      - name: "Prod: Apply"
+        if: github.ref_name == 'main'
+        run: |
+          export TF_WORKSPACE=gcp-networking-prod
+          terraform init -reconfigure
+          terraform apply -var="target_env=prod" -auto-approve -no-color
+        working-directory: projects/shared-infra
