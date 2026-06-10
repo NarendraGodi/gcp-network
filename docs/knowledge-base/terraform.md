@@ -7,6 +7,11 @@
 **Reason:** The `-reconfigure` flag is intended for legacy backends (S3, GCS). The `cloud` block handles state reconfiguration automatically.
 **Fix:** Always use `terraform init` without the `-reconfigure` flag in CI/CD pipelines targeting HCP.
 
+### 2. Required Token Not Found (Authentication)
+**Issue:** `Error: Required token could not be found` during `terraform init` in GitHub Actions.
+**Reason:** The `setup-terraform` action may not always correctly propagate the `cli_config_token` to the underlying shell environment in all scenarios.
+**Fix:** Explicitly set the environment variable `TF_TOKEN_app_terraform_io` in the GitHub Actions job. Terraform looks for this specific variable name (formatted as `TF_TOKEN_<hostname>` with underscores) to authenticate against HCP Terraform.
+
 ## Architectural Patterns
 
 ### 1. Workspace Discovery (Tags vs Prefix)
