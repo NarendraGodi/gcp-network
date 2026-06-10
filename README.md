@@ -101,3 +101,11 @@ terraform init -upgrade
 
 ---
 *Note: This repository is managed as part of a secure infrastructure rollout. Ensure credentials are never committed to version control.*
+
+## Knowledge Base & Troubleshooting
+
+For detailed setup instructions and lessons learned during the development of this Landing Zone, please refer to the following:
+
+- **[HCP Terraform Setup](docs/knowledge-base/hcp.md)**: Workspace naming, tagging, and execution modes.
+- **[GitHub Actions CI/CD](docs/knowledge-base/github.md)**: Branching strategy, secrets, and deployment flow.
+- **[Terraform Troubleshooting](docs/knowledge-base/terraform.md)**: Common errors (like `-reconfigure`), architectural patterns, and monorepo pathing.
