@@ -26,3 +26,13 @@ When using HCP Terraform (especially with remote execution), only files within t
 
 ### 3. Shared VPC Host Logic
 In this project, we explicitly use `google_compute_shared_vpc_host_project` to convert a standard project into a network hub. This must be done **before** subnets can be shared with service projects.
+
+## Future Roadmap & Security Hardening
+
+### 1. Transition to Workload Identity Federation (WIF)
+**Objective:** Replace static JSON Service Account keys with short-lived, keyless authentication.
+- **Why:** To align with Google's "Secure by Default" standards and eliminate the risk of compromised static keys.
+- **Action:** 
+    - Configure a Workload Identity Pool and Provider in GCP.
+    - Establish a trust relationship between HCP Terraform (using its OIDC provider) and the GCP Organization.
+    - Update HCP Workspaces to use `TFC_GCP_PROVIDER_AUTH` instead of `GOOGLE_CREDENTIALS`.
