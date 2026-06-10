@@ -22,7 +22,7 @@ jobs:
         if: github.ref_name != 'dev' && github.ref_name != 'nonprod' && github.ref_name != 'main'
         run: |
           export TF_WORKSPACE=gcp-networking-dev
-          terraform init -reconfigure
+          terraform init -no-color
           terraform plan -var="target_env=dev" -no-color
         working-directory: projects/shared-infra
 
@@ -31,7 +31,7 @@ jobs:
         if: github.ref_name == 'dev'
         run: |
           export TF_WORKSPACE=gcp-networking-dev
-          terraform init -reconfigure
+          terraform init -no-color
           terraform apply -var="target_env=dev" -auto-approve -no-color
         working-directory: projects/shared-infra
 
@@ -39,7 +39,7 @@ jobs:
         if: github.ref_name == 'dev'
         run: |
           export TF_WORKSPACE=gcp-networking-nonprod
-          terraform init -reconfigure
+          terraform init -no-color
           terraform plan -var="target_env=nonprod" -no-color
         working-directory: projects/shared-infra
 
@@ -48,7 +48,7 @@ jobs:
         if: github.ref_name == 'nonprod'
         run: |
           export TF_WORKSPACE=gcp-networking-nonprod
-          terraform init -reconfigure
+          terraform init -no-color
           terraform apply -var="target_env=nonprod" -auto-approve -no-color
         working-directory: projects/shared-infra
 
@@ -56,7 +56,7 @@ jobs:
         if: github.ref_name == 'nonprod'
         run: |
           export TF_WORKSPACE=gcp-networking-prod
-          terraform init -reconfigure
+          terraform init -no-color
           terraform plan -var="target_env=prod" -no-color
         working-directory: projects/shared-infra
 
@@ -65,6 +65,6 @@ jobs:
         if: github.ref_name == 'main'
         run: |
           export TF_WORKSPACE=gcp-networking-prod
-          terraform init -reconfigure
+          terraform init -no-color
           terraform apply -var="target_env=prod" -auto-approve -no-color
         working-directory: projects/shared-infra
