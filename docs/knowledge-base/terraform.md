@@ -12,6 +12,19 @@
 **Reason:** The `setup-terraform` action may not always correctly propagate the `cli_config_token` to the underlying shell environment in all scenarios.
 **Fix:** Explicitly set the environment variable `TF_TOKEN_app_terraform_io` in the GitHub Actions job. Terraform looks for this specific variable name (formatted as `TF_TOKEN_<hostname>` with underscores) to authenticate against HCP Terraform.
 
+## Deployment Errors
+
+### 1. Cloud Billing API Disabled
+**Issue:** `Error: failed pre-requisites: failed to check permissions on billing account ... googleapi: Error 403: Cloud Billing API has not been used in project ... before or it is disabled.`
+**Reason:** When Terraform attempts to create a project and link it to a billing account, it must use the Cloud Billing API. This API must be enabled in the project where the Service Account (the caller) is hosted.
+**Fix:** 
+1. Go to the project hosting the Service Account (e.g., `fifth-honor-498711-k7`).
+2. Navigate to **APIs & Services > Library**.
+3. Search for **"Cloud Billing API"** and click **Enable**.
+4. Wait a few minutes for propagation and retry the deployment.
+
+**Standardization:** To prevent this issue in downstream projects, the `cloudbilling.googleapis.com` API has been added to the `activate_apis` list in `main.tf`.
+
 ## Architectural Patterns
 
 ### 1. Workspace Discovery (Tags vs Prefix)
