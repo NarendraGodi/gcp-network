@@ -38,7 +38,9 @@ For the automation to work, the following roles must be granted to the email abo
 1. **Project Creator** (`roles/resourcemanager.projectCreator`): To create host projects.
 2. **Billing User** (`roles/billing.user`): To associate projects with the billing account.
 3. **Folder Admin** (`roles/resourcemanager.folderAdmin`): To move projects into the Dev/Non-Prod/Prod folder hierarchy.
-4. **Compute Network Admin** (`roles/compute.networkAdmin`): To manage Shared VPCs and subnets.
+4. Compute Network Admin (`roles/compute.networkAdmin`): To manage VPCs and subnets.
+5. **Shared VPC Admin** (`roles/compute.xpnAdmin`): To enable Shared VPC Host status at the Organization level.
+
 
 ##### HCP Configuration:
 1. **Generate Key:** Create a JSON key for the "Grand Architect" SA in the GCP Console.

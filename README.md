@@ -25,7 +25,8 @@ Ensure your "Grand Architect" Service Account (e.g., `iac-landing-zone-admin@...
 - **Project Creator**: To create the environment host projects.
 - **Billing User**: To link projects to billing.
 - **Folder Admin**: To organize projects into folders.
-- **Compute Network Admin**: To manage Shared VPCs.
+- **Compute Network Admin**: To manage VPCs and subnets.
+- **Compute Shared VPC Admin**: To enable Shared VPC Host status.
 
 See the [HCP Setup Guide](docs/knowledge-base/hcp.md) for full IAM details.
 
