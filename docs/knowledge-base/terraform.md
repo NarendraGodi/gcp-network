@@ -41,6 +41,14 @@
 1. **Request Increase:** Visit the [Google Billing Quota Request](https://support.google.com/code/contact/billing_quota_increase) form. It usually takes 24-48 hours to process.
 2. **Clean Up:** Check the **Resource Manager** and delete any old or unused test projects to free up "quota slots."
 
+## Operational Settings
+
+### 1. Project Deletion Policy
+To support the iterative "Create/Destroy" needs of the stabilization phase, we have added a `deletion_policy` variable.
+- **`DELETE` (Current Default):** Allows Terraform to fully destroy projects. Useful for testing and fixing quota issues.
+- **`PREVENT` (Recommended for Prod):** Prevents accidental project deletion.
+- **How to use:** In HCP Terraform, you can set the variable `deletion_policy` to `PREVENT` once your landing zone is finalized.
+
 **Standardization:** All three mandatory APIs (Billing, Resource Manager, IAM) have been added to the `activate_apis` list in the core module.
 
 ### 4. Unreadable Module Directory (HCP Remote Execution)

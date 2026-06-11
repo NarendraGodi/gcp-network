@@ -38,4 +38,5 @@ module "landing_zone" {
   network_parent  = local.env_config.network_parent.id
   region          = local.env_config.region
   ip_range        = local.env_config.ip_range
+  deletion_policy = var.deletion_policy
 }

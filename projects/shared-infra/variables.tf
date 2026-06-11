@@ -13,3 +13,9 @@ variable "GOOGLE_CREDENTIALS" {
   default     = null
   sensitive   = true
 }
+
+variable "deletion_policy" {
+  description = "The deletion policy for the project (DELETE or PREVENT)"
+  type        = string
+  default     = "DELETE"
+}

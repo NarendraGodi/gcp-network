@@ -27,3 +27,9 @@ variable "ip_range" {
   description = "The /16 IP supernet for this environment"
   type        = string
 }
+
+variable "deletion_policy" {
+  description = "The deletion policy for the project (DELETE or PREVENT)"
+  type        = string
+  default     = "DELETE"
+}

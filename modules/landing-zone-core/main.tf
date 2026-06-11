@@ -8,6 +8,7 @@ module "network_host_project" {
   org_id            = var.org_id
   folder_id         = split("/", var.network_parent)[1]
   billing_account   = var.billing_account
+  deletion_policy   = var.deletion_policy
 
   activate_apis = [
     "compute.googleapis.com",
