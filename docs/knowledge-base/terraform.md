@@ -40,6 +40,7 @@
 **Fix:** 
 1. **Request Increase:** Visit the [Google Billing Quota Request](https://support.google.com/code/contact/billing_quota_increase) form. It usually takes 24-48 hours to process.
 2. **Clean Up:** Check the **Resource Manager** and delete any old or unused test projects to free up "quota slots."
+3. **The "Soft-Delete" Lag:** Note that deleting a project may not immediately free up a quota slot. Google often keeps the billing association active for several hours or days while the project is in a "Pending Deletion" state. If the build continues to fail after cleanup, you must wait for the manual quota increase.
 
 ## Operational Settings
 
