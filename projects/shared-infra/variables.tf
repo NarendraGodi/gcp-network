@@ -6,3 +6,10 @@ variable "target_env" {
     error_message = "target_env must be one of: dev, nonprod, prod."
   }
 }
+
+variable "GOOGLE_CREDENTIALS" {
+  description = "GCP Service Account Key (Sensitive)"
+  type        = string
+  default     = null
+  sensitive   = true
+}
