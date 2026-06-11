@@ -29,9 +29,14 @@
 **The "403 Ambiguity" Note:** In GCP, a 403 error can be confusing. It often points to a missing `projectCreator` role, but it is **also** the default error when the API itself is disabled. Always check the API status before debugging IAM permissions.
 **Fix:** Same as the Billing API; enable it in your Root/Seed project (`fifth-honor-498711-k7`) via the API Library.
 
-**Standardization:** Both `cloudbilling.googleapis.com` and `cloudresourcemanager.googleapis.com` have been added to the `activate_apis` list in the core module.
+### 3. IAM API Disabled
+**Issue:** `Error: Error creating service account: googleapi: Error 403: Identity and Access Management (IAM) API has not been used in project ... before or it is disabled.`
+**Reason:** Terraform needs to create a Project-level Service Account to manage the new host project. This requires the IAM API to be active in the project where the code is running.
+**Fix:** Enable the **Identity and Access Management (IAM) API** in your Root/Seed project via the API Library.
 
-### 3. Unreadable Module Directory (HCP Remote Execution)
+**Standardization:** All three mandatory APIs (Billing, Resource Manager, IAM) have been added to the `activate_apis` list in the core module.
+
+### 4. Unreadable Module Directory (HCP Remote Execution)
 **Issue:** `Error: Unreadable module directory ... Unable to evaluate directory symlink: lstat ../../modules: no such file or directory`
 **Reason:** In HCP Terraform **Remote Execution** mode, only the files within the current working directory are uploaded by default. If your project uses local modules located outside its own folder (e.g., `../../modules`), the remote runner cannot find them.
 **Fixes:**

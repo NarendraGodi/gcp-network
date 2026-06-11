@@ -10,6 +10,7 @@ Before running this automation for the first time, the following manual steps **
 Terraform requires these APIs in your Root/Seed project (e.g., `fifth-honor-498711-k7`) to manage the organization:
 - **Cloud Billing API**: To link projects to your billing account.
 - **Cloud Resource Manager API**: To create and manage projects and folders.
+- **Identity and Access Management (IAM) API**: To create service accounts for the new projects.
 
 **Action:** Go to **APIs & Services > Library**, search for each, and click **Enable**.
 
