@@ -22,29 +22,20 @@ provider "google" {
 
 locals {
   foundation_data = jsondecode(file("${path.module}/foundation_layer.json"))
-  billing_account = "015CC7-496842-8E745D"
   
   # Select the data for the target environment
   env_config = local.foundation_data[var.target_env]
+  common     = local.foundation_data["common"]
 }
 
-# Network Host Project for the specific environment
-module "network_host_project" {
-  source  = "terraform-google-modules/project-factory/google"
-  version = "~> 17.0"
+# Core Landing Zone Logic
+module "landing_zone" {
+  source = "../../modules/landing-zone-core"
 
-  name              = "ng-${var.target_env}-net-host"
-  random_project_id = true
-  org_id            = "997580462738"
-  folder_id         = split("/", local.env_config.network_parent)[1]
-  billing_account   = local.billing_account
-
-  activate_apis = [
-    "compute.googleapis.com",
-    "dns.googleapis.com",
-    "servicenetworking.googleapis.com",
-    "logging.googleapis.com",
-    "monitoring.googleapis.com",
-    "cloudbilling.googleapis.com"
-  ]
+  target_env      = var.target_env
+  org_id          = local.common.org_id
+  billing_account = local.common.billing_account
+  network_parent  = local.env_config.network_parent
+  region          = local.env_config.region
+  ip_range        = local.env_config.ip_range
 }

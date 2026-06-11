@@ -1,9 +1,14 @@
 output "project_id" {
-  value       = module.network_host_project.project_id
-  description = "The ID of the created networking host project (to be used by upstream app projects)"
+  description = "The ID of the created host project"
+  value       = module.landing_zone.project_id
 }
 
 output "project_number" {
-  value       = module.network_host_project.project_number
-  description = "The project number of the created networking host project"
+  description = "The number of the created host project"
+  value       = module.landing_zone.project_number
+}
+
+output "vpc_name" {
+  description = "The name of the Shared VPC"
+  value       = module.landing_zone.vpc_name
 }

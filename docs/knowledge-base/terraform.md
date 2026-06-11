@@ -25,6 +25,13 @@
 
 **Standardization:** To prevent this issue in downstream projects, the `cloudbilling.googleapis.com` API has been added to the `activate_apis` list in `main.tf`.
 
+### 2. Unreadable Module Directory (HCP Remote Execution)
+**Issue:** `Error: Unreadable module directory ... Unable to evaluate directory symlink: lstat ../../modules: no such file or directory`
+**Reason:** In HCP Terraform **Remote Execution** mode, only the files within the current working directory are uploaded by default. If your project uses local modules located outside its own folder (e.g., `../../modules`), the remote runner cannot find them.
+**Fixes:**
+- **Option A (Recommended):** In HCP Workspace Settings > General, set the **Terraform Working Directory** to `projects/shared-infra`. This tells HCP to upload the entire repository root, making the `/modules` folder accessible.
+- **Option B:** Switch the Workspace **Execution Mode** to **Local**. This runs the code on the GitHub runner (which has all files) and only sends state to HCP.
+
 ## Architectural Patterns
 
 ### 1. Workspace Discovery (Tags vs Prefix)

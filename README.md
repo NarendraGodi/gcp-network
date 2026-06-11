@@ -2,15 +2,29 @@
 
 This repository contains the foundational network infrastructure for the GCP Landing Zone Phase 2. The project is designed with a strict **Separation of Duties** model to distinguish between core infrastructure management and consumer-level resource deployment.
 
+## Mandatory Prerequisites (Manual Setup)
+
+Before running this automation for the first time, the following manual steps **must** be completed. Failure to do so will result in API or Path errors.
+
+### 1. GCP: Enable Cloud Billing API
+Terraform requires this API to link your new projects to your billing account.
+- **Where:** In your Root/Seed project (e.g., `fifth-honor-498711-k7`).
+- **Action:** Go to **APIs & Services > Library**, search for **"Cloud Billing API"**, and click **Enable**.
+
+### 2. HCP Terraform: Set Working Directory
+Because this is a monorepo with a shared `/modules` folder, HCP Terraform must be told where the project starts.
+- **Where:** In each HCP Workspace > **Settings > General**.
+- **Action:** Set **Terraform Working Directory** to `projects/shared-infra`.
+- **Why:** This ensures the remote runner can see the `../../modules` directory.
+
+### 3. GCP: Identity & Access
+Ensure your "Grand Architect" Service Account has the 4 mandatory Org-level roles assigned. See [HCP Setup Guide](docs/knowledge-base/hcp.md) for details.
+
 ## Project Structure
 
-- **`data/`**: Contains the foundation layer configuration (JSON), defining folder IDs and environment-specific settings.
-- **`projects/shared-infra/`**: The core infrastructure workspace.
-    - **`foundation_layer.json`**: Environment-specific settings (moved here for HCP Terraform compatibility).
-    - **`main.tf`**: Handles project creation and defines the `env_config` logic.
-    - **`shared-vpc.tf`**: Manages the Shared VPC Host enablement, Network, and tiered Subnets.
-    - **`variables.tf`**: Defines input variables (like `target_env`).
-    - **`outputs.tf`**: Exports critical data (Project IDs, VPC names) for downstream use.
+- **`modules/landing-zone-core/`**: The **Reusable Engine**. This is a stateless module that creates projects, VPCs, and subnets. It is designed to be portable across different GCP Organizations.
+- **`projects/shared-infra/`**: The **Consumer Workspace**. This is where we "instantiate" the Landing Zone for your specific organization using `foundation_layer.json`.
+- **`data/`**: (Deprecated - use projects/shared-infra/foundation_layer.json) Legacy configuration storage.
 - **`GCP Landing Zone Phase 2 Network Plan.pdf`**: The architectural roadmap.
 
 ## Dynamic Configuration (env_config)

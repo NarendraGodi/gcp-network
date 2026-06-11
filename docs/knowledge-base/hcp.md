@@ -13,10 +13,15 @@ Workspaces must follow the pattern: `gcp-networking-<env>`
 Every workspace MUST be tagged with the label **`networking`**. 
 - **Why?** The Terraform `cloud` block in our code uses `tags = ["networking"]` to discover valid target workspaces. This is a security guardrail to prevent cross-project deployments.
 
-### 3. Execution Mode
+### 3. Terraform Working Directory
+For this monorepo structure where modules are located in the root (outside the project folder):
+- In Workspace Settings > General, set **Terraform Working Directory** to `projects/shared-infra`.
+- **Why?** This tells HCP to upload the entire repository root to the remote runner, ensuring it can resolve relative paths to `../../modules`.
+
+### 4. Execution Mode
 In the Workspace Settings > General:
 - Set **Execution Mode** to **Remote** (recommended for professional setups) or **Local**.
-- If using **Remote**, HCP Terraform manages the deployment. If using **Local**, GitHub Actions manages it.
+- If using **Remote**, the `GOOGLE_CREDENTIALS` variable must be present in HCP.
 
 ### 4. Authentication
 #### User API Token
