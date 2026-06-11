@@ -23,9 +23,15 @@
 3. Search for **"Cloud Billing API"** and click **Enable**.
 4. Wait a few minutes for propagation and retry the deployment.
 
-**Standardization:** To prevent this issue in downstream projects, the `cloudbilling.googleapis.com` API has been added to the `activate_apis` list in `main.tf`.
+### 2. Cloud Resource Manager API Disabled
+**Issue:** `Error 403: Cloud Resource Manager API has not been used in project ... before or it is disabled.`
+**Reason:** Terraform requires this API to create and manage the hierarchy (Projects and Folders) in your organization.
+**The "403 Ambiguity" Note:** In GCP, a 403 error can be confusing. It often points to a missing `projectCreator` role, but it is **also** the default error when the API itself is disabled. Always check the API status before debugging IAM permissions.
+**Fix:** Same as the Billing API; enable it in your Root/Seed project (`fifth-honor-498711-k7`) via the API Library.
 
-### 2. Unreadable Module Directory (HCP Remote Execution)
+**Standardization:** Both `cloudbilling.googleapis.com` and `cloudresourcemanager.googleapis.com` have been added to the `activate_apis` list in the core module.
+
+### 3. Unreadable Module Directory (HCP Remote Execution)
 **Issue:** `Error: Unreadable module directory ... Unable to evaluate directory symlink: lstat ../../modules: no such file or directory`
 **Reason:** In HCP Terraform **Remote Execution** mode, only the files within the current working directory are uploaded by default. If your project uses local modules located outside its own folder (e.g., `../../modules`), the remote runner cannot find them.
 **Fixes:**

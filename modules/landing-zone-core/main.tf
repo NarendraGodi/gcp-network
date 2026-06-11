@@ -15,7 +15,8 @@ module "network_host_project" {
     "servicenetworking.googleapis.com",
     "logging.googleapis.com",
     "monitoring.googleapis.com",
-    "cloudbilling.googleapis.com"
+    "cloudbilling.googleapis.com",
+    "cloudresourcemanager.googleapis.com"
   ]
 }
 

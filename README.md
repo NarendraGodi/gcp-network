@@ -6,10 +6,12 @@ This repository contains the foundational network infrastructure for the GCP Lan
 
 Before running this automation for the first time, the following manual steps **must** be completed. Failure to do so will result in API or Path errors.
 
-### 1. GCP: Enable Cloud Billing API
-Terraform requires this API to link your new projects to your billing account.
-- **Where:** In your Root/Seed project (e.g., `fifth-honor-498711-k7`).
-- **Action:** Go to **APIs & Services > Library**, search for **"Cloud Billing API"**, and click **Enable**.
+### 1. GCP: Enable Admin APIs
+Terraform requires these APIs in your Root/Seed project (e.g., `fifth-honor-498711-k7`) to manage the organization:
+- **Cloud Billing API**: To link projects to your billing account.
+- **Cloud Resource Manager API**: To create and manage projects and folders.
+
+**Action:** Go to **APIs & Services > Library**, search for each, and click **Enable**.
 
 ### 2. HCP Terraform: Set Working Directory
 Because this is a monorepo with a shared `/modules` folder, HCP Terraform must be told where the project starts.
@@ -18,7 +20,13 @@ Because this is a monorepo with a shared `/modules` folder, HCP Terraform must b
 - **Why:** This ensures the remote runner can see the `../../modules` directory.
 
 ### 3. GCP: Identity & Access
-Ensure your "Grand Architect" Service Account has the 4 mandatory Org-level roles assigned. See [HCP Setup Guide](docs/knowledge-base/hcp.md) for details.
+Ensure your "Grand Architect" Service Account (e.g., `iac-landing-zone-admin@...`) has the following **Organization-level** roles assigned:
+- **Project Creator**: To create the environment host projects.
+- **Billing User**: To link projects to billing.
+- **Folder Admin**: To organize projects into folders.
+- **Compute Network Admin**: To manage Shared VPCs.
+
+See the [HCP Setup Guide](docs/knowledge-base/hcp.md) for full IAM details.
 
 ## Project Structure
 
