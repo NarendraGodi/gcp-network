@@ -1,30 +1,77 @@
 {
   "dev": {
-    "project_parent": "folders/4712088881",
-    "network_parent": "folders/97756398457",
-    "sandbox_folder": "folders/1002920048276",
-    "iac_control_center": "folders/688984390447",
+    "metadata": {
+      "name": "development",
+      "description": "Sandbox for experimental features and student labs"
+    },
+    "project_parent": {
+      "name": "development",
+      "id": "folders/4712088881"
+    },
+    "network_parent": {
+      "name": "dev-infra",
+      "id": "folders/97756398457"
+    },
+    "sandbox_folder": {
+      "name": "sandbox",
+      "id": "folders/1002920048276"
+    },
+    "iac_control_center": {
+      "name": "iac-control-center",
+      "id": "folders/688984390447"
+    },
     "region": "asia-south1",
     "ip_range": "10.10.0.0/16"
   },
   "nonprod": {
-    "project_parent": "folders/811794378178",
-    "network_parent": "folders/10443262684",
-    "iac_control_center": "folders/688984390447",
+    "metadata": {
+      "name": "non-production",
+      "description": "Stable environment for UAT and pre-prod verification"
+    },
+    "project_parent": {
+      "name": "non-production",
+      "id": "folders/811794378178"
+    },
+    "network_parent": {
+      "name": "non-prod-infra",
+      "id": "folders/10443262684"
+    },
+    "iac_control_center": {
+      "name": "iac-control-center",
+      "id": "folders/688984390447"
+    },
     "region": "asia-south1",
     "ip_range": "10.11.0.0/16"
   },
   "prod": {
-    "project_parent": "folders/714878098591",
-    "network_parent": "folders/573383204079",
-    "iac_control_center": "folders/688984390447",
+    "metadata": {
+      "name": "production",
+      "description": "Live production infrastructure"
+    },
+    "project_parent": {
+      "name": "production",
+      "id": "folders/714878098591"
+    },
+    "network_parent": {
+      "name": "prod-infra",
+      "id": "folders/573383204079"
+    },
+    "iac_control_center": {
+      "name": "iac-control-center",
+      "id": "folders/688984390447"
+    },
     "region": "asia-south1",
     "ip_range": "10.12.0.0/16"
   },
   "common": {
-    "traditional_root": "folders/567608298431",
-    "shared_infra_root": "folders/316087338813",
-    "billing_project_id": "ng-trad-billing-997580",
+    "traditional_root": {
+      "name": "traditional",
+      "id": "folders/567608298431"
+    },
+    "shared_infra_root": {
+      "name": "shared-infra",
+      "id": "folders/316087338813"
+    },
     "org_id": "997580462738",
     "billing_account": "015CC7-496842-8E745D"
   }

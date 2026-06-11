@@ -34,6 +34,13 @@
 **Reason:** Terraform needs to create a Project-level Service Account to manage the new host project. This requires the IAM API to be active in the project where the code is running.
 **Fix:** Enable the **Identity and Access Management (IAM) API** in your Root/Seed project via the API Library.
 
+### 4. Cloud Billing Quota Exceeded
+**Issue:** `Error 400: Precondition check failed ... Cloud billing quota exceeded`
+**Reason:** New GCP accounts or those on Free Trials often have a limit on how many projects can be linked to a billing account simultaneously (typically 3 to 5 projects).
+**Fix:** 
+1. **Request Increase:** Visit the [Google Billing Quota Request](https://support.google.com/code/contact/billing_quota_increase) form. It usually takes 24-48 hours to process.
+2. **Clean Up:** Check the **Resource Manager** and delete any old or unused test projects to free up "quota slots."
+
 **Standardization:** All three mandatory APIs (Billing, Resource Manager, IAM) have been added to the `activate_apis` list in the core module.
 
 ### 4. Unreadable Module Directory (HCP Remote Execution)
