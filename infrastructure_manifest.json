@@ -1,0 +1,50 @@
+{
+  "organization": {
+    "name": "narendragodi.cv",
+    "id": "997580462738",
+    "billing_account": "015CC7-496842-8E745D"
+  },
+  "environments": {
+    "dev": {
+      "folder_id": "folders/4712088881",
+      "network": {
+        "vpc_name": "vpc-dev-shared",
+        "supernet": "10.10.0.0/16",
+        "subnets": {
+          "web": "10.10.10.0/24",
+          "app": "10.10.20.0/24",
+          "db": "10.10.30.0/24"
+        }
+      }
+    },
+    "nonprod": {
+      "folder_id": "folders/811794378178",
+      "network": {
+        "vpc_name": "vpc-nonprod-shared",
+        "supernet": "10.11.0.0/16",
+        "subnets": {
+          "web": "10.11.10.0/24",
+          "app": "10.11.20.0/24",
+          "db": "10.11.30.0/24"
+        }
+      }
+    },
+    "prod": {
+      "folder_id": "folders/714878098591",
+      "network": {
+        "vpc_name": "vpc-prod-shared",
+        "supernet": "10.12.0.0/16",
+        "subnets": {
+          "web": "10.12.10.0/24",
+          "app": "10.12.20.0/24",
+          "db": "10.12.30.0/24"
+        }
+      }
+    }
+  },
+  "shared_folders": {
+    "traditional": "folders/567608298431",
+    "shared_infra": "folders/316087338813",
+    "iac_control_center": "folders/688984390447"
+  }
+}
