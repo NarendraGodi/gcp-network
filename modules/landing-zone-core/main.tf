@@ -3,7 +3,7 @@ module "network_host_project" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 17.0"
 
-  name              = "ng-${var.target_env}-net-host"
+  name              = "ng-${var.target_env}-net-host-v2"
   random_project_id = true
   org_id            = var.org_id
   folder_id         = split("/", var.network_parent)[1]
