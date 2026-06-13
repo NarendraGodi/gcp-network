@@ -32,7 +32,8 @@ See the [HCP Setup Guide](docs/knowledge-base/hcp.md) for full IAM details.
 
 ## Project Structure
 
-- **`modules/landing-zone-core/`**: The **Reusable Engine**. This is a stateless module that creates projects, VPCs, and subnets. It is designed to be portable across different GCP Organizations.
+- **`modules/landing-zone-core/`**: The **Landing Zone Engine**. Creates host projects and Shared VPCs for the core environments.
+- **`modules/vpc/`**: A **Standalone Utility Module**. Can be called from other repositories or projects to create a standard VPC network and subnets with the landing zone's IP scheme.
 - **`projects/shared-infra/`**: The **Consumer Workspace**. This is where we "instantiate" the Landing Zone for your specific organization using `foundation_layer.json`.
 - **`data/`**: (Deprecated - use projects/shared-infra/foundation_layer.json) Legacy configuration storage.
 - **`GCP Landing Zone Phase 2 Network Plan.pdf`**: The architectural roadmap.

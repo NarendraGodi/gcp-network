@@ -22,7 +22,7 @@ provider "google" {
 
 locals {
   foundation_data = jsondecode(file("${path.module}/foundation_layer.json"))
-  
+
   # Select the data for the target environment
   env_config = local.foundation_data[var.target_env]
   common     = local.foundation_data["common"]
