@@ -22,3 +22,16 @@ variable "target_env" {
   description = "The environment name (e.g. dev, nonprod, prod)"
   type        = string
 }
+
+variable "subnets" {
+  description = "Map of subnet configurations. The key is the subnet suffix (e.g., 'web'), and the value contains the CIDR offset and description."
+  type = map(object({
+    offset      = number
+    description = string
+  }))
+  default = {
+    web = { offset = 10, description = "Web Tier" }
+    app = { offset = 20, description = "Application Tier" }
+    db  = { offset = 30, description = "Database Tier" }
+  }
+}

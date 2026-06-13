@@ -7,23 +7,11 @@ module "vpc" {
   routing_mode = "GLOBAL"
 
   subnets = [
-    {
-      subnet_name   = "sb-${var.target_env}-${var.region}-web"
-      subnet_ip     = cidrsubnet(var.ip_range, 8, 10)
+    for name, config in var.subnets : {
+      subnet_name   = "sb-${var.target_env}-${var.region}-${name}"
+      subnet_ip     = cidrsubnet(var.ip_range, 8, config.offset)
       subnet_region = var.region
-      description   = "Web Tier for ${var.target_env}"
-    },
-    {
-      subnet_name   = "sb-${var.target_env}-${var.region}-app"
-      subnet_ip     = cidrsubnet(var.ip_range, 8, 20)
-      subnet_region = var.region
-      description   = "Application Tier for ${var.target_env}"
-    },
-    {
-      subnet_name   = "sb-${var.target_env}-${var.region}-db"
-      subnet_ip     = cidrsubnet(var.ip_range, 8, 30)
-      subnet_region = var.region
-      description   = "Database Tier for ${var.target_env}"
+      description   = "${config.description} for ${var.target_env}"
     }
   ]
 }
