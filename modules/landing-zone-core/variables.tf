@@ -33,3 +33,9 @@ variable "deletion_policy" {
   type        = string
   default     = "DELETE"
 }
+
+variable "custom_project_id" {
+  description = "Optional: Explicitly set the Project ID. If provided, random_project_id is disabled."
+  type        = string
+  default     = null
+}

@@ -35,8 +35,9 @@ module "landing_zone" {
   target_env      = var.target_env
   org_id          = local.common.org_id
   billing_account = local.common.billing_account
-  network_parent  = local.env_config.network_parent.id
-  region          = local.env_config.region
-  ip_range        = local.env_config.ip_range
-  deletion_policy = var.deletion_policy
+  network_parent   = local.env_config.network_parent.id
+  region           = local.env_config.region
+  ip_range         = local.env_config.ip_range
+  deletion_policy  = var.deletion_policy
+  custom_project_id = try(local.env_config.custom_project_id, null)
 }

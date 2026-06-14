@@ -21,7 +21,8 @@
       "id": "folders/688984390447"
     },
     "region": "asia-south1",
-    "ip_range": "10.10.0.0/16"
+    "ip_range": "10.10.0.0/16",
+    "custom_project_id": "ng-dev-net-host-7031"
   },
   "nonprod": {
     "metadata": {
@@ -41,7 +42,8 @@
       "id": "folders/688984390447"
     },
     "region": "asia-south1",
-    "ip_range": "10.11.0.0/16"
+    "ip_range": "10.11.0.0/16",
+    "custom_project_id": "ng-nonprod-net-host-8ade"
   },
   "prod": {
     "metadata": {
@@ -61,7 +63,8 @@
       "id": "folders/688984390447"
     },
     "region": "asia-south1",
-    "ip_range": "10.12.0.0/16"
+    "ip_range": "10.12.0.0/16",
+    "custom_project_id": "ng-prod-net-host-5d3b"
   },
   "common": {
     "traditional_root": {
